@@ -1,0 +1,15 @@
+{
+    "dir": {
+        "deploy": {
+            "root":         "./public/"
+        },
+        "src": {
+            "games":        "./games/"
+        }
+    },
+    "file": {
+        "entry":            "main.js",
+        "game":             "game.js",
+        "admin":            "admin.js"
+    }
+}
