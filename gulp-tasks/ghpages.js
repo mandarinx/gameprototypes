@@ -4,12 +4,13 @@ var pkg             = require('../package.json');
 
 var options = {
     remoteUrl:  pkg.repository.url,
-    push:       true
+    push:       false
 }
 
 module.exports = function(gulp) {
     gulp.task('ghpages', function () {
         gulp.src(cfg.dir.src.games + '**/*.*')
-            .pipe(gh_pages(options));
+            .pipe(gh_pages())
+            .pipe(gulp.dest('.tmp'));
     });
 }
