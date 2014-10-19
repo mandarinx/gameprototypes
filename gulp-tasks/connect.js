@@ -8,7 +8,7 @@ module.exports = function(gulp) {
         connect.server({
             root: cfg.dir.src.games,
             port: 8000,
-            host: 'localtest.me',
+            // host: 'localtest.me',
             livereload: true
         });
     });

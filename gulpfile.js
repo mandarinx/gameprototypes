@@ -17,5 +17,4 @@ Object.keys(tasks).forEach(function(task) {
 });
 
 gulp.task('default', ['connect'], function() {});
-
 gulp.task('deploy', ['ghpages'], function() {});
