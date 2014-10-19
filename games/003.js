@@ -15,6 +15,7 @@ var cows;
 var ground;
 var emitter;
 var bounces = 0;
+var crashed = false;
 var cow_time = {
     next: 0,
     start_offset: 1000,
@@ -110,15 +111,19 @@ var mainState = {
 
     update: function() {
         game.physics.arcade.collide(ufo, ground, this.ufoLand, null, this);
-        game.physics.arcade.collide(ufo, cows, this.abduct, null, this);
         game.physics.arcade.collide(cows, ground, this.cowLand, null, this);
         game.physics.arcade.overlap(beam, cows, this.elevate, null, this);
         game.physics.arcade.collide(emitter, ground);
 
+        if (!crashed) {
+            game.physics.arcade.collide(ufo, cows, this.abduct, null, this);
+        }
+
         beam.y = ufo.y + 4;
         beam.x = ufo.x;
 
-        if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+        if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) &&
+            !crashed) {
             this.boost();
         } else {
             beam.animations.play('off');
@@ -182,6 +187,7 @@ var mainState = {
     },
 
     ufoLand: function(ufo, ground) {
+        crashed = true;
         ufo.body.angularVelocity = (Math.random() * 150) + 150;
         emitter.x = ufo.x;
         emitter.y = pixel(ght-1);
@@ -207,6 +213,7 @@ var mainState = {
     },
 
     restartGame: function() {
+        crashed = false;
         score = 0;
         bounces = 0;
         cow_time.next = 0;
